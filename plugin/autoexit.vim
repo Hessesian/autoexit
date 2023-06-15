@@ -7,7 +7,7 @@ endfunction
 
 function! AutoExitInsertMode()
   timer_stop(timer_id)
-  s:timer_id = timer_start(300, 'ExitToNormal')
+  let s:timer_id = timer_start(300, 'ExitToNormal')
 endfunction
 
 function! ExitToNormal(timer)

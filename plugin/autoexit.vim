@@ -1,12 +1,9 @@
 function! AutoExitInsertMode()
-  let timer_id = timer_start(300, 'AutoExitInsertMode')
-
-  function! AutoExitInsertMode(timer_id)
-    if mode() == 'i'
       stoptimer timer_id
+  let s:timer_id = timer_start(300, 'AutoExitInsertMode')
+    if mode() == 'i'
       execute ':normal'
     endif
-  endfunction
 endfunction
 
-autocmd InsertEnter * call AutoExitInsertMode()
+autocmd InsertCharPre* call AutoExitInsertMode()

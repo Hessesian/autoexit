@@ -1,16 +1,28 @@
-function! ExitTimer()
-   call timer_stopall()
-   call AutoExitInsertMode()
+let s:idleexit_timer = 0
+if !exists('g:idle_timeout')
+    let g:idle_timeout= 600
+endif
+function! IdleExitCallback(timer_id)
+    stopinsert
 endfunction
 
-function! AutoExitInsertMode()
-  let s:timer_id = timer_start(300, 'ExitToNormal')
+function! IdleExitStart()
+    if s:idleexit_timer != 0
+        call timer_stop(s:idleexit_timer)
+        let s:idleexit_timer = 0
+    endif
+    let s:idleexit_timer = timer_start(g:idle_timeout, 'IdleExitCallback')
 endfunction
 
-function! ExitToNormal(timer)
-   if mode() == 'i'
-      execute ':stopinsert'
+function! IdleExitStop()
+    if s:idleexit_timer != 0
+        call timer_stop(s:idleexit_timer)
+        let s:idleexit_timer = 0
     endif
 endfunction
 
-autocmd InsertCharPre * call ExitTimer()
+augroup idleExit
+    autocmd!
+    autocmd InsertCharPre * call IdleExitStart()
+    autocmd InsertLeave * call IdleExitStop()
+augroup END

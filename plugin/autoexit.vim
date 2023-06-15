@@ -9,7 +9,7 @@ endfunction
 
 function! ExitToNormal(timer)
    if mode() == 'i'
-      execute ':normal'
+      execute ':stopinsert'
     endif
 endfunction
 

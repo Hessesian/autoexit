@@ -9,4 +9,4 @@ function! ExitToNormal()
     endif
 endfunction
 
-autocmd InsertCharPre* call AutoExitInsertMode()
+autocmd InsertCharPre * call AutoExitInsertMode()

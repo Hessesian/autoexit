@@ -1,4 +1,4 @@
-local auto_exit_insert = {}
+auto_exit_insert = {}
 
 function auto_exit_insert.init()
   vim.api.nvim_create_autocmd('InsertEnter', { callback = auto_exit_insert.auto_exit })

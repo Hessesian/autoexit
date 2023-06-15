@@ -3,10 +3,10 @@ function! AutoExitInsertMode()
   stoptimer timer_id
 endfunction
 
-function! ExitToNormal(){
+function! ExitToNormal()
    if mode() == 'i'
       execute ':normal'
     endif
-}
+endfunction
 
 autocmd InsertCharPre* call AutoExitInsertMode()

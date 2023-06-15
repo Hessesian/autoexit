@@ -3,7 +3,6 @@ let g:idle_timeout = 300
 
 " Variable to keep track of the last activity time
 let g:last_activity = reltime()
-
 " Define the Timer function
 function! AutoExitTimer()
   " Calculate the time elapsed since the last activity
@@ -28,6 +27,6 @@ endfunction
 " Set up the Timer and event callbacks
 augroup AutoExit
   autocmd!
-  autocmd CursorHoldI * call OnCursorHoldI()
-  autocmd CursorHoldI * call AutoExitTimer()
+  autocmd InsertCharPre * call OnCursorHoldI()
+  autocmd InsertCharPre * call AutoExitTimer()
 augroup END
